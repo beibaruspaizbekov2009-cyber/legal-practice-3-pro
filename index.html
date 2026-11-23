@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#18110c">
-<title>Legal Practice 3.0 PRO — Виртуальная юридическая стажировка РК</title>
+<title>Legal Practice 3.0 PRO — расширенная виртуальная юридическая стажировка РК</title>
 <meta name="description" content="Интерактивный образовательный симулятор юридических стажировок для студентов РК: практические кейсы, конструктор документов, экспресс-тесты, правовой анализ и портфолио.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap');
@@ -79,10 +79,14 @@
     <button type="button" class="navbtn" data-page="lab"><span class="emoji">🧪</span> 3. Case Lab PRO</button>
     <button type="button" class="navbtn" data-page="docgen"><span class="emoji">📝</span> 4. Конструктор Исков</button>
     <button type="button" class="navbtn" data-page="quiz"><span class="emoji">🎯</span> 5. Экспресс-тест НПА</button>
-    <button type="button" class="navbtn" data-page="portfolio"><span class="emoji">◈</span> 6. Портфолио и Награды</button>
+    <button type="button" class="navbtn" data-page="portfolio"><span class="emoji">◈</span> 6. Личный кабинет стажёра</button>
     <button type="button" class="navbtn active" data-page="aiagent"><span class="emoji">🤖</span> 7. ИИ-Юрист РК</button>
     <button type="button" class="navbtn" data-page="courtbank"><span class="emoji">🏛️</span> 8. Судебная практика РК</button>
     <button type="button" class="navbtn" data-page="laws"><span class="emoji">📚</span> 9. НПА и О проекте</button>
+    <div class="navhint" style="margin-top:15px">НОВЫЕ ИНСТРУМЕНТЫ PRO</div>
+    <button type="button" class="navbtn" data-page="docai"><span class="emoji">📄</span> AI-анализ документов</button>
+    <button type="button" class="navbtn" data-page="courtroom"><span class="emoji">🏛️</span> Симулятор суда</button>
+    <button type="button" class="navbtn" data-page="examiner"><span class="emoji">🎓</span> Юридический экзаменатор</button>
   </nav>
   <div class="sidefoot"><b>● Учебный режим PRO</b><p>Все кейсы вымышлены.</p></div>
 </aside>
@@ -582,6 +586,38 @@
   </div>
 </section>
 
+
+<!-- НОВЫЙ ИНСТРУМЕНТ: AI-АНАЛИЗАТОР ДОКУМЕНТОВ -->
+<section class="page" id="docai">
+  <div class="eyebrow">Gemini · Legal document intelligence</div><h1 class="h1">AI-анализатор документов</h1>
+  <p class="lead">Загрузите текст документа или вставьте его содержание. ИИ поможет выявить спорные условия, риски и вопросы для дополнительной проверки.</p>
+  <div class="panel" style="margin-top:20px">
+    <label class="small muted" for="docAiFile">Текстовый файл (.txt, .md)</label><input id="docAiFile" class="field" type="file" accept=".txt,.md,text/plain" style="display:block;width:100%;margin:8px 0 14px">
+    <label class="small muted" for="docAiText">Или вставьте текст документа</label><textarea id="docAiText" class="answer" placeholder="Вставьте текст договора, претензии или другого документа. Перед отправкой удалите ИИН, адреса, телефоны и другие персональные данные." style="min-height:220px;margin-top:8px"></textarea>
+    <div class="row wrap" style="margin-top:12px"><span class="hint">Не загружайте документы с персональными или конфиденциальными данными.</span><button class="btn primary" id="analyzeDocBtn">Проанализировать документ →</button></div>
+  </div>
+  <div class="panel" style="margin-top:16px"><h3>Результат анализа</h3><div id="docAiResult" class="doc-preview">Здесь появится структурированный анализ: предмет документа, риски, неоднозначные условия и рекомендации по проверке.</div></div>
+</section>
+
+<!-- НОВЫЙ ИНСТРУМЕНТ: СИМУЛЯТОР СУДЕБНОГО ЗАСЕДАНИЯ -->
+<section class="page" id="courtroom">
+  <div class="eyebrow">Практика · Moot court</div><h1 class="h1">Симулятор судебного заседания</h1>
+  <p class="lead">Выберите процессуальную роль, изучите учебную фабулу и подготовьте выступление. Gemini сыграет роль оппонента и даст обратную связь.</p>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:20px">
+    <div class="panel"><label for="courtRole">Ваша роль</label><select id="courtRole" class="field" style="width:100%;margin-top:8px"><option>Адвокат истца</option><option>Адвокат ответчика</option><option>Прокурор</option><option>Защитник</option><option>Представитель потерпевшего</option><option>Судья</option></select></div>
+    <div class="panel"><label for="courtScenario">Учебное дело</label><select id="courtScenario" class="field" style="width:100%;margin-top:8px"><option value="civil">Гражданский спор: возврат займа</option><option value="labor">Трудовой спор: дисциплинарное увольнение</option><option value="consumer">Защита прав потребителя: недостаток товара</option></select></div>
+  </div>
+  <div class="panel" style="margin-top:16px"><h3>Фабула дела</h3><p id="courtFact" class="casenote">Истец утверждает, что передал ответчику 320 000 тенге в долг. В подтверждение представлены банковский перевод и переписка с обещанием вернуть деньги. Ответчик считает перевод подарком.</p><label for="courtSpeech">Ваша позиция / выступление</label><textarea id="courtSpeech" class="answer" style="margin-top:8px" placeholder="Изложите позицию, аргументы, доказательства и правовое обоснование..."></textarea><div class="row wrap" style="margin-top:12px"><button class="btn primary" id="courtTurnBtn">Выступить перед судом →</button><span class="hint">Учебная симуляция, не реальное судебное разбирательство.</span></div></div>
+  <div class="panel" style="margin-top:16px"><h3>Ответ суда и обратная связь</h3><div id="courtReply" class="doc-preview">После выступления здесь появятся вопросы оппонента, реакция суда и оценка аргументации.</div></div>
+</section>
+
+<!-- НОВЫЙ ИНСТРУМЕНТ: ЮРИДИЧЕСКИЙ ЭКЗАМЕНАТОР -->
+<section class="page" id="examiner">
+  <div class="eyebrow">Assessment · Kazakhstan law</div><h1 class="h1">Юридический экзаменатор</h1>
+  <p class="lead">Проверьте знания по базовым правовым принципам. После ответа получите результат и пояснения от ИИ.</p>
+  <div class="panel" style="margin-top:20px"><div class="row wrap"><span class="tag gold">5 вопросов</span><span class="pill" id="examProgress">Вопрос 1 / 5</span></div><div class="progress" style="margin:16px 0"><span id="examBar" style="width:20%"></span></div><h2 id="examQuestion" style="font-size:20px">Какой принцип означает, что лицо считается невиновным, пока его виновность не доказана?</h2><div id="examOptions" style="margin-top:15px"></div><div class="row wrap" style="margin-top:15px"><button class="btn primary" id="examNextBtn">Ответить →</button><span id="examFeedback" class="hint"></span></div><div id="examResult" style="margin-top:18px"></div></div>
+</section>
+
 <footer class="footer">
   Legal Practice 3.0 PRO · Учебный проект · <a href="https://adilet.zan.kz/rus" target="_blank" rel="noopener">ИПС «Әділет» ↗</a>
 </footer>
@@ -1070,6 +1106,27 @@ function renderPortfolio(){
   $('historyRows').innerHTML=rows.join('')||'<tr><td colspan="4" class="muted">Нет активностей.</td></tr>';
 }
 
+
+// Дополнительные инструменты Legal Practice 3.0 PRO. Все обращения идут через защищённый /api/chat.
+async function askGemini(prompt, system='Ты — учебный юридический помощник по праву Республики Казахстан. Не выдумывай нормы и номера статей. Если не уверен в актуальности нормы, прямо укажи, что её нужно проверить в официальной ИПС «Әділет». Это образовательная информация, не индивидуальная юридическая консультация.') {
+  const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:[{role:'user',content:system+'\n\n'+prompt}]})});
+  const data=await r.json().catch(()=>({})); if(!r.ok) throw new Error(data.error||'Не удалось получить ответ Gemini'); if(!data.answer) throw new Error('ИИ вернул пустой ответ'); return data.answer;
+}
+$('docAiFile').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;if(f.size>200000){notify('Файл слишком большой: максимум 200 КБ');e.target.value='';return;} $('docAiText').value=await f.text();});
+$('analyzeDocBtn').addEventListener('click',async()=>{const text=$('docAiText').value.trim();if(text.length<80){notify('Добавьте текст документа (не менее 80 символов)');return;}const out=$('docAiResult'),btn=$('analyzeDocBtn');btn.disabled=true;btn.textContent='Анализирую…';out.textContent='Gemini изучает текст документа…';try{out.textContent=await askGemini('Проанализируй следующий документ по праву Республики Казахстан. Структура ответа: 1) тип и предмет документа; 2) права и обязанности сторон; 3) потенциальные правовые и редакционные риски; 4) неоднозначные или отсутствующие условия; 5) вопросы, которые нужно уточнить; 6) рекомендации. Не утверждай, что документ юридически действителен без проверки.\n\nТЕКСТ ДОКУМЕНТА:\n'+text.slice(0,18000));}catch(e){out.textContent='Ошибка: '+e.message;}finally{btn.disabled=false;btn.textContent='Проанализировать документ →';}});
+const courtFacts={civil:'Истец утверждает, что передал ответчику 320 000 тенге в долг. В подтверждение представлены банковский перевод и переписка с обещанием вернуть деньги. Ответчик считает перевод подарком.',labor:'Работника уволили за дисциплинарное нарушение. Работник утверждает, что работодатель не запросил письменное объяснение и не ознакомил его с приказом надлежащим образом.',consumer:'Покупатель обнаружил недостаток товара вскоре после покупки. Продавец отказывается удовлетворить требование, ссылаясь на неправильную эксплуатацию. Документы и экспертиза пока не представлены.'};
+$('courtScenario').addEventListener('change',e=>{$('courtFact').textContent=courtFacts[e.target.value];$('courtReply').textContent='Фабула изменена. Подготовьте свою позицию и выступите перед судом.';});
+$('courtTurnBtn').addEventListener('click',async()=>{const speech=$('courtSpeech').value.trim();if(speech.length<40){notify('Подготовьте выступление минимум из 40 символов');return;}const out=$('courtReply'),btn=$('courtTurnBtn');btn.disabled=true;btn.textContent='Суд рассматривает позицию…';out.textContent='Идёт учебное заседание…';try{out.textContent=await askGemini('Проведи учебную симуляцию судебного заседания в Казахстане. Фабула: '+courtFacts[$('courtScenario').value]+'\nРоль студента: '+$('courtRole').value+'\nВыступление: '+speech+'\nОтветь как оппонент и суд: задай 2-3 уточняющих вопроса, укажи сильные и слабые стороны аргументов, оцени выступление по 10-балльной шкале и предложи улучшения. Не изображай реальное судебное решение.');}catch(e){out.textContent='Ошибка: '+e.message;}finally{btn.disabled=false;btn.textContent='Выступить перед судом →';}});
+const examItems=[
+{q:'Какой принцип означает, что лицо считается невиновным, пока его виновность не доказана?',o:['Презумпция невиновности','Состязательность','Диспозитивность','Гласность'],a:0,e:'Презумпция невиновности закрепляет обязанность доказывания обвинения и запрет считать лицо виновным до установленного законом подтверждения.'},
+{q:'Какой нормативный акт обладает высшей юридической силой в Республике Казахстан?',o:['Гражданский кодекс','Конституция РК','Постановление акимата','Приказ министерства'],a:1,e:'Конституция РК имеет высшую юридическую силу и прямое действие на всей территории страны.'},
+{q:'Что обычно необходимо сделать работодателю до применения дисциплинарного взыскания?',o:['Немедленно уволить','Запросить письменное объяснение работника','Удержать штраф из зарплаты','Опубликовать сведения о работнике'],a:1,e:'Трудовое законодательство предусматривает процедуру затребования письменного объяснения; конкретные сроки и порядок нужно проверять по действующей редакции ТК РК.'},
+{q:'Как называется лицо, которое обращается в суд за защитой нарушенного права в гражданском процессе?',o:['Истец','Свидетель','Эксперт','Переводчик'],a:0,e:'Истец — лицо, обратившееся в суд за защитой своих прав или законных интересов.'},
+{q:'Какой источник следует использовать для проверки актуальной редакции нормативного правового акта РК?',o:['Непроверенный форум','Сообщение в соцсети','Официальная ИПС «Әділет»','Случайный комментарий'],a:2,e:'Для проверки действующей редакции нормативных правовых актов следует обращаться к официальной ИПС «Әділет» и другим официальным источникам.'}
+];let examIndex=0,examAnswers=[];
+function renderExam(){const q=examItems[examIndex];$('examProgress').textContent=`Вопрос ${examIndex+1} / ${examItems.length}`;$('examBar').style.width=((examIndex+1)/examItems.length*100)+'%';$('examQuestion').textContent=q.q;$('examOptions').innerHTML=q.o.map((v,i)=>`<label class="option"><input type="radio" name="examChoice" value="${i}"><span>${v}</span></label>`).join('');$('examFeedback').textContent='';$('examResult').textContent='';$('examNextBtn').textContent=examIndex===examItems.length-1?'Завершить экзамен':'Ответить →';}
+$('examNextBtn').addEventListener('click',()=>{const chosen=document.querySelector('input[name="examChoice"]:checked');if(!chosen){notify('Выберите один ответ');return;}examAnswers[examIndex]=Number(chosen.value);if(examIndex<examItems.length-1){examIndex++;renderExam();}else{const score=examAnswers.reduce((n,a,i)=>n+(a===examItems[i].a?1:0),0);$('examQuestion').textContent=`Экзамен завершён: ${score} из ${examItems.length}`;$('examOptions').innerHTML=examItems.map((q,i)=>`<div class="doc"><b>${i+1}. ${q.q}</b><p style="margin-top:7px">Ваш ответ: ${q.o[examAnswers[i]]}<br>Правильный ответ: ${q.o[q.a]}<br>${q.e}</p></div>`).join('');$('examNextBtn').textContent='Пройти заново';$('examResult').innerHTML=`<div class="feedback"><div class="fbig">${Math.round(score/examItems.length*100)}%</div><b>${score>=4?'Хороший результат':'Есть темы для повторения'}</b><p>Результат учебного теста. Проверьте актуальные нормы по официальным источникам.</p></div>`;if(score>=4&&!state.examPassed){state.examPassed=true;state.extraXp=(state.extraXp||0)+20;persist();updateDashboard();} $('examNextBtn').onclick=()=>{examIndex=0;examAnswers=[];$('examNextBtn').onclick=null;renderExam();};}});
+
 document.addEventListener('click',e=>{
   let b=e.target.closest('[data-page],[data-goto]');
   if(b){
@@ -1078,6 +1135,7 @@ document.addEventListener('click',e=>{
     if(target==='missions')renderMissions();
     if(target==='quiz')renderQuiz();
     if(target==='courtbank')renderCourtBank();
+    if(target==='examiner')renderExam();
     navigate(target);
   }
 });
