@@ -3,7 +3,7 @@ export const json = (data, status=200, headers={}) => new Response(JSON.stringif
 export async function hash(value) { const digest = await crypto.subtle.digest('SHA-256', enc.encode(value)); return [...new Uint8Array(digest)].map(x=>x.toString(16).padStart(2,'0')).join(''); }
 export async function passwordHash(password, salt) {
   const key = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveBits']);
-  const bits = await crypto.subtle.deriveBits({name:'PBKDF2', salt:enc.encode(salt), iterations:210000, hash:'SHA-256'}, key, 256);
+  const bits = await crypto.subtle.deriveBits({name:'PBKDF2', salt:enc.encode(salt), iterations:100000, hash:'SHA-256'}, key, 256);
   return [...new Uint8Array(bits)].map(x=>x.toString(16).padStart(2,'0')).join('');
 }
 export function cookie(request, name) { const raw=request.headers.get('Cookie')||''; const part=raw.split(';').map(x=>x.trim()).find(x=>x.startsWith(name+'=')); return part ? decodeURIComponent(part.slice(name.length+1)) : null; }
